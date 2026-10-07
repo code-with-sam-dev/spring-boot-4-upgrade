@@ -1,0 +1,35 @@
+# ref: step-5a-objectmapper-probe (028810a)
+# commit: Step 5a (probe): the custom mapper declared as ObjectMapper again
+# spring boot parent: 4.1.1
+# java: openjdk version "21.0.10" 2026-01-20 LTS
+# recorded: 2026-10-07 18:25 CAT
+
+### POST /orders, snake_case body (the documented contract)
+$ curl -i -X POST http://localhost:8080/orders -H 'Content-Type: application/json' -d '{"customer_name":"Sarah Thompson","currency":"GBP","items":[{"sku":"KETTLE-01","quantity":1,"unit_price":24.50},{"sku":"MUG-02","quantity":2,"unit_price":6.00}]}'
+HTTP/1.1 400 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 07 Oct 2026 16:25:37 GMT
+Connection: close
+
+{"timestamp":"2026-10-07T16:25:37.731Z","status":400,"error":"Bad Request","path":"/orders"}
+
+### POST /orders, camelCase body
+$ curl -i -X POST http://localhost:8080/orders -H 'Content-Type: application/json' -d '{"customerName":"Sarah Thompson","currency":"GBP","items":[{"sku":"KETTLE-01","quantity":1,"unitPrice":24.50},{"sku":"MUG-02","quantity":2,"unitPrice":6.00}]}'
+HTTP/1.1 201 
+Location: /orders/1
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 07 Oct 2026 16:25:37 GMT
+
+{"id":1,"customerName":"Sarah Thompson","items":[{"sku":"KETTLE-01","quantity":1,"unitPrice":"24.50 GBP"},{"sku":"MUG-02","quantity":2,"unitPrice":"6.00 GBP"}],"total":"36.50 GBP","placedOn":"2026-10-07","paymentStatus":"AUTHORISED"}
+
+### GET /orders/1
+$ curl -i http://localhost:8080/orders/1
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 233
+Date: Wed, 07 Oct 2026 16:25:37 GMT
+
+{"id":1,"customerName":"Sarah Thompson","items":[{"sku":"KETTLE-01","quantity":1,"unitPrice":"24.50 GBP"},{"sku":"MUG-02","quantity":2,"unitPrice":"6.00 GBP"}],"total":"36.50 GBP","placedOn":"2026-10-07","paymentStatus":"AUTHORISED"}
+

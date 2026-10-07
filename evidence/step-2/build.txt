@@ -1,0 +1,29 @@
+# ref: step-2-boot-4.1-parent (affac5c)
+# commit: Step 2: change the parent to Spring Boot 4.1.1, nothing else
+# spring boot parent: 4.1.1
+# java: openjdk version "21.0.10" 2026-01-20 LTS
+# recorded: 2026-10-07 18:24 CAT
+
+diff --git a/pom.xml b/pom.xml
+index 71bedee..43397ee 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -8,7 +8,7 @@
+   <parent>
+     <groupId>org.springframework.boot</groupId>
+     <artifactId>spring-boot-starter-parent</artifactId>
+-    <version>3.5.16</version>
++    <version>4.1.1</version>
+     <relativePath/>
+   </parent>
+ 
+
+$ ./mvnw clean verify
+[ERROR] 'dependencies.dependency.version' for org.springframework.boot:spring-boot-starter-undertow:jar is missing. @ line 38, column 17
+[ERROR] 'dependencies.dependency.version' for org.testcontainers:junit-jupiter:jar is missing. @ line 86, column 17
+[ERROR] 'dependencies.dependency.version' for org.testcontainers:postgresql:jar is missing. @ line 91, column 17
+
+Maven Central, does the Undertow starter exist?
+  spring-boot-starter-undertow 3.5.16  HTTP 200
+  spring-boot-starter-undertow 4.0.0   HTTP 404
+  spring-boot-starter-undertow 4.1.1   HTTP 404

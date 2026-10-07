@@ -1,0 +1,13 @@
+# ref: step-0-boot-3.5 (f8f7ddc)
+# commit: Orders service on Spring Boot 3.5.16
+# spring boot parent: 3.5.16
+# java: openjdk version "21.0.10" 2026-01-20 LTS
+# recorded: 2026-10-07 18:23 CAT
+
+Compiler deprecation warnings on the untouched 3.5 app:
+
+$ ./mvnw clean test-compile -Dmaven.compiler.showDeprecation=true -Dmaven.compiler.showWarnings=true
+[WARNING] src/main/java/com/example/orders/payments/HttpPaymentGateway.java:[31,17] setConnectTimeout(java.time.Duration) in org.springframework.boot.web.client.RestTemplateBuilder has been deprecated and marked for removal
+[WARNING] src/main/java/com/example/orders/payments/HttpPaymentGateway.java:[32,17] setReadTimeout(java.time.Duration) in org.springframework.boot.web.client.RestTemplateBuilder has been deprecated and marked for removal
+[WARNING] src/test/java/com/example/orders/order/OrderControllerWebMvcTest.java:[37,6] org.springframework.boot.test.mock.mockito.MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal
+[WARNING] src/test/java/com/example/orders/order/OrdersApiIT.java:[34,6] org.springframework.boot.test.mock.mockito.MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal

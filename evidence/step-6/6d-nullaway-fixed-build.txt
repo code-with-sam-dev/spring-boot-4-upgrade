@@ -1,0 +1,22 @@
+# ref: step-6d-nullaway-fixed (3a70a1b)
+# commit: Step 6d: check the nullable body, the build passes NullAway
+# spring boot parent: 4.1.1
+# java: openjdk version "21.0.10" 2026-01-20 LTS
+# recorded: 2026-10-07 18:26 CAT
+
+$ ./mvnw clean verify
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.706 s -- in com.example.orders.order.OrderControllerWebMvcTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.130 s -- in com.example.orders.order.OrderServiceTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.example.orders.order.CreateOrderRequestTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.example.orders.order.OrderTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.032 s -- in com.example.orders.payments.HttpPaymentGatewayTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in com.example.orders.config.JacksonConfigTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.136 s -- in com.example.orders.money.MoneySerializerJsonTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.example.orders.money.MoneyTest
+[INFO] Tests run: 34, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.916 s -- in com.example.orders.ApplicationIT
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.223 s -- in com.example.orders.order.OrdersApiIT
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.740 s -- in com.example.orders.order.OrdersHttpIT
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.432 s -- in com.example.orders.order.OrdersRestTestClientIT
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS

@@ -1,0 +1,53 @@
+# ref: step-3a-tomcat (fd965c9)
+# commit: Step 3a: Tomcat instead of Undertow, Testcontainers 2 artifact names
+# spring boot parent: 4.1.1
+# java: openjdk version "21.0.10" 2026-01-20 LTS
+# recorded: 2026-10-07 18:24 CAT
+
+$ ./mvnw clean verify
+[WARNING] src/main/java/com/example/orders/config/JacksonConfig.java:[29,13] org.springframework.http.converter.json.Jackson2ObjectMapperBuilder in org.springframework.http.converter.json has been deprecated and marked for removal
+[INFO] BUILD FAILURE
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.15.0:compile (default-compile) on project orders: Compilation failure: Compilation failure: 
+[ERROR] src/main/java/com/example/orders/config/JacksonConfig.java:[3,45] package com.fasterxml.jackson.databind does not exist
+[ERROR] src/main/java/com/example/orders/config/JacksonConfig.java:[3,1] static import only from classes and interfaces
+[ERROR] src/main/java/com/example/orders/config/JacksonConfig.java:[4,45] package com.fasterxml.jackson.databind does not exist
+[ERROR] src/main/java/com/example/orders/config/JacksonConfig.java:[4,1] static import only from classes and interfaces
+[ERROR] src/main/java/com/example/orders/config/JacksonConfig.java:[9,38] package com.fasterxml.jackson.databind does not exist
+[ERROR] src/main/java/com/example/orders/config/JacksonConfig.java:[10,51] package com.fasterxml.jackson.datatype.jsr310.deser does not exist
+[ERROR] src/main/java/com/example/orders/config/JacksonConfig.java:[11,49] package com.fasterxml.jackson.datatype.jsr310.ser does not exist
+[ERROR] src/main/java/com/example/orders/config/JacksonConfig.java:[28,12] cannot find symbol
+[ERROR]   symbol:   class ObjectMapper
+[ERROR]   location: class com.example.orders.config.JacksonConfig
+[ERROR] src/main/java/com/example/orders/money/MoneySerializer.java:[5,34] package com.fasterxml.jackson.core does not exist
+[ERROR] src/main/java/com/example/orders/money/MoneySerializer.java:[6,38] package com.fasterxml.jackson.databind does not exist
+[ERROR] src/main/java/com/example/orders/money/MoneySerializer.java:[7,38] package com.fasterxml.jackson.databind does not exist
+[ERROR] src/main/java/com/example/orders/money/MoneySerializer.java:[9,40] cannot find symbol
+[ERROR]   symbol:   class JsonComponent
+[ERROR]   location: package org.springframework.boot.jackson
+[ERROR] src/main/java/com/example/orders/money/MoneySerializer.java:[15,38] cannot find symbol
+[ERROR]   symbol: class JsonSerializer
+[ERROR] src/main/java/com/example/orders/money/MoneySerializer.java:[14,2] cannot find symbol
+[ERROR]   symbol: class JsonComponent
+[ERROR] src/main/java/com/example/orders/money/MoneySerializer.java:[20,13] cannot find symbol
+[ERROR]   symbol:   class JsonGenerator
+[ERROR]   location: class com.example.orders.money.MoneySerializer
+[ERROR] src/main/java/com/example/orders/money/MoneySerializer.java:[21,13] cannot find symbol
+[ERROR]   symbol:   class SerializerProvider
+[ERROR]   location: class com.example.orders.money.MoneySerializer
+[ERROR] src/main/java/com/example/orders/payments/HttpPaymentGateway.java:[10,43] package org.springframework.boot.web.client does not exist
+[ERROR] src/main/java/com/example/orders/payments/HttpPaymentGateway.java:[27,13] cannot find symbol
+[ERROR]   symbol:   class RestTemplateBuilder
+[ERROR]   location: class com.example.orders.payments.HttpPaymentGateway
+[ERROR] src/main/java/com/example/orders/config/JacksonConfig.java:[30,26] cannot find symbol
+[ERROR]   symbol:   class LocalDateSerializer
+[ERROR]   location: class com.example.orders.config.JacksonConfig
+[ERROR] src/main/java/com/example/orders/config/JacksonConfig.java:[31,26] cannot find symbol
+[ERROR]   symbol:   class LocalDateDeserializer
+[ERROR]   location: class com.example.orders.config.JacksonConfig
+[ERROR] src/main/java/com/example/orders/config/JacksonConfig.java:[34,36] cannot find symbol
+[ERROR]   symbol:   variable WRITE_DATES_AS_TIMESTAMPS
+[ERROR]   location: class com.example.orders.config.JacksonConfig
+[ERROR] src/main/java/com/example/orders/config/JacksonConfig.java:[33,41] cannot find symbol
+[ERROR]   symbol:   variable SNAKE_CASE
+[ERROR]   location: class com.example.orders.config.JacksonConfig
+[ERROR] src/main/java/com/example/orders/money/MoneySerializer.java:[17,5] method does not override or implement a method from a supertype

@@ -1,0 +1,85 @@
+# ref: step-6-opt-in (6ff5966)
+# commit: Step 6e: rename the reported property, remove the properties migrator
+# spring boot parent: 4.1.1
+# java: openjdk version "21.0.10" 2026-01-20 LTS
+# recorded: 2026-10-07 18:26 CAT
+
+### POST /orders (payments called through the @HttpExchange client)
+$ curl -i -X POST http://localhost:8080/orders -H 'Content-Type: application/json' -d '{"customer_name":"Sarah Thompson","currency":"GBP","items":[{"sku":"KETTLE-01","quantity":1,"unit_price":24.50},{"sku":"MUG-02","quantity":2,"unit_price":6.00}]}'
+HTTP/1.1 201 
+Deprecation: @1790812800
+Link: <https://example.com/orders-api/v2-migration>; rel="deprecation"; type="text/html"
+Sunset: Thu, 1 Apr 2027 00:00:00 GMT
+Location: /orders/1
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 07 Oct 2026 16:26:46 GMT
+
+{"id":1,"customer_name":"Sarah Thompson","items":[{"sku":"KETTLE-01","quantity":1,"unit_price":"24.50 GBP"},{"sku":"MUG-02","quantity":2,"unit_price":"6.00 GBP"}],"total":"36.50 GBP","placed_on":"07/10/2026","payment_status":"AUTHORISED"}
+
+### GET /orders/1, no X-Version header (default 1)
+$ curl -i http://localhost:8080/orders/1
+HTTP/1.1 200 
+Deprecation: @1790812800
+Link: <https://example.com/orders-api/v2-migration>; rel="deprecation"; type="text/html"
+Sunset: Thu, 1 Apr 2027 00:00:00 GMT
+Content-Type: application/json
+Content-Length: 238
+Date: Wed, 07 Oct 2026 16:26:46 GMT
+
+{"id":1,"customer_name":"Sarah Thompson","items":[{"sku":"KETTLE-01","quantity":1,"unit_price":"24.50 GBP"},{"sku":"MUG-02","quantity":2,"unit_price":"6.00 GBP"}],"total":"36.50 GBP","placed_on":"07/10/2026","payment_status":"AUTHORISED"}
+
+### GET /orders/1, X-Version: 1 (deprecated)
+$ curl -i http://localhost:8080/orders/1 -H 'X-Version: 1'
+HTTP/1.1 200 
+Deprecation: @1790812800
+Link: <https://example.com/orders-api/v2-migration>; rel="deprecation"; type="text/html"
+Sunset: Thu, 1 Apr 2027 00:00:00 GMT
+Content-Type: application/json
+Content-Length: 238
+Date: Wed, 07 Oct 2026 16:26:46 GMT
+
+{"id":1,"customer_name":"Sarah Thompson","items":[{"sku":"KETTLE-01","quantity":1,"unit_price":"24.50 GBP"},{"sku":"MUG-02","quantity":2,"unit_price":"6.00 GBP"}],"total":"36.50 GBP","placed_on":"07/10/2026","payment_status":"AUTHORISED"}
+
+### GET /orders/1, X-Version: 2
+$ curl -i http://localhost:8080/orders/1 -H 'X-Version: 2'
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 131
+Date: Wed, 07 Oct 2026 16:26:46 GMT
+
+{"id":1,"customer_name":"Sarah Thompson","item_count":3,"total":"36.50 GBP","placed_on":"07/10/2026","payment_status":"AUTHORISED"}
+
+### GET /orders/1, X-Version: 3 (unsupported)
+$ curl -i http://localhost:8080/orders/1 -H 'X-Version: 3'
+HTTP/1.1 400 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 07 Oct 2026 16:26:46 GMT
+Connection: close
+
+{"timestamp":"2026-10-07T16:26:46.175Z","status":400,"error":"Bad Request","message":"Invalid API version: '3.0.0'.","path":"/orders/1"}
+
+### GET /orders/1, X-Version: abc (not a version)
+$ curl -i http://localhost:8080/orders/1 -H 'X-Version: abc'
+HTTP/1.1 400 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 07 Oct 2026 16:26:46 GMT
+Connection: close
+
+{"timestamp":"2026-10-07T16:26:46.190Z","status":400,"error":"Bad Request","message":"Invalid API version: 'abc'.","path":"/orders/1"}
+
+### GET /orders/999 (unknown, error message back after the property rename)
+$ curl -i http://localhost:8080/orders/999
+HTTP/1.1 404 
+Deprecation: @1790812800
+Link: <https://example.com/orders-api/v2-migration>; rel="deprecation"; type="text/html"
+Sunset: Thu, 1 Apr 2027 00:00:00 GMT
+Link: <https://example.com/orders-api/v2-migration>; rel="deprecation"; type="text/html"
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 07 Oct 2026 16:26:46 GMT
+
+{"timestamp":"2026-10-07T16:26:46.209Z","status":404,"error":"Not Found","message":"No order with id 999","path":"/orders/999"}
+

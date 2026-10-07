@@ -1,0 +1,38 @@
+# ref: step-4-flyway-starter (c86fc93)
+# commit: Step 4: add spring-boot-starter-flyway
+# spring boot parent: 4.1.1
+# java: openjdk version "21.0.10" 2026-01-20 LTS
+# recorded: 2026-10-07 18:24 CAT
+
+diff --git a/pom.xml b/pom.xml
+index 617b293..5c96522 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -46,8 +46,8 @@
+       <artifactId>spring-boot-starter-validation</artifactId>
+     </dependency>
+     <dependency>
+-      <groupId>org.flywaydb</groupId>
+-      <artifactId>flyway-core</artifactId>
++      <groupId>org.springframework.boot</groupId>
++      <artifactId>spring-boot-starter-flyway</artifactId>
+     </dependency>
+     <dependency>
+       <groupId>org.flywaydb</groupId>
+
+$ ./mvnw clean verify
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.634 s -- in com.example.orders.order.OrderControllerWebMvcTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.143 s -- in com.example.orders.order.OrderServiceTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.example.orders.order.CreateOrderRequestTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in com.example.orders.order.OrderTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.237 s -- in com.example.orders.payments.HttpPaymentGatewayTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in com.example.orders.config.JacksonConfigTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.098 s -- in com.example.orders.money.MoneySerializerJsonTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in com.example.orders.money.MoneyTest
+[INFO] Tests run: 29, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.635 s -- in com.example.orders.ApplicationIT
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.921 s -- in com.example.orders.order.OrdersApiIT
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.692 s -- in com.example.orders.order.OrdersHttpIT
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.401 s -- in com.example.orders.order.OrdersRestTestClientIT
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS

@@ -1,0 +1,47 @@
+# ref: step-3-loud-fixed (102ae69)
+# commit: Step 3d: declare the custom mapper as a JsonMapper
+# spring boot parent: 4.1.1
+# java: openjdk version "21.0.10" 2026-01-20 LTS
+# recorded: 2026-10-07 18:24 CAT
+
+The same commit with the Testcontainers integration tests (failsafe) included.
+
+$ ./mvnw verify
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.628 s -- in com.example.orders.order.OrderControllerWebMvcTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.136 s -- in com.example.orders.order.OrderServiceTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.example.orders.order.CreateOrderRequestTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in com.example.orders.order.OrderTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.226 s -- in com.example.orders.payments.HttpPaymentGatewayTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in com.example.orders.config.JacksonConfigTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.097 s -- in com.example.orders.money.MoneySerializerJsonTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.example.orders.money.MoneyTest
+[INFO] Tests run: 29, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.415 s -- in com.example.orders.ApplicationIT
+[ERROR] Tests run: 4, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 1.845 s <<< FAILURE! -- in com.example.orders.order.OrdersApiIT
+[ERROR] com.example.orders.order.OrdersApiIT.returns404ForAnUnknownOrder -- Time elapsed: 0.107 s <<< ERROR!
+    jakarta.servlet.ServletException:
+    Request processing failed: org.springframework.dao.InvalidDataAccessResourceUsageException: JDBC exception executing SQL [ERROR: relation "orders" does not exist
+[ERROR] com.example.orders.order.OrdersApiIT.placesAnOrder -- Time elapsed: 0.092 s <<< ERROR!
+    Request processing failed: org.springframework.dao.InvalidDataAccessResourceUsageException: could not execute statement [ERROR: relation "orders" does not exist
+[ERROR] com.example.orders.order.OrdersApiIT.readsBackWhatWasStored -- Time elapsed: 0.007 s <<< ERROR!
+[ERROR] com.example.orders.order.OrdersApiIT.recordsADecline -- Time elapsed: 0.014 s <<< ERROR!
+[ERROR] Tests run: 4, Failures: 2, Errors: 1, Skipped: 0, Time elapsed: 1.601 s <<< FAILURE! -- in com.example.orders.order.OrdersHttpIT
+[ERROR] com.example.orders.order.OrdersHttpIT.placesAnOrderEndToEnd -- Time elapsed: 0.101 s <<< FAILURE!
+    org.opentest4j.AssertionFailedError:
+[ERROR] com.example.orders.order.OrdersHttpIT.getReturnsTheStoredOrder -- Time elapsed: 0.009 s <<< ERROR!
+    java.lang.NullPointerException: Cannot invoke "java.net.URI.toString()" because the return value of "org.springframework.http.HttpHeaders.getLocation()" is null
+[ERROR] com.example.orders.order.OrdersHttpIT.theStubDeclinesLargeOrders -- Time elapsed: 0.012 s <<< FAILURE!
+    java.lang.AssertionError:
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.307 s <<< FAILURE! -- in com.example.orders.order.OrdersRestTestClientIT
+[ERROR] com.example.orders.order.OrdersRestTestClientIT.placesAnOrderEndToEnd -- Time elapsed: 0.026 s <<< FAILURE!
+    java.lang.AssertionError: Status expected:<201 CREATED> but was:<500 INTERNAL_SERVER_ERROR>
+[ERROR]   OrdersHttpIT.placesAnOrderEndToEnd:44 
+[ERROR]   OrdersHttpIT.theStubDeclinesLargeOrders:53 
+[ERROR]   OrdersRestTestClientIT.placesAnOrderEndToEnd:38 Status expected:<201 CREATED> but was:<500 INTERNAL_SERVER_ERROR>
+[ERROR]   OrdersApiIT.placesAnOrder:45->postOrder:88 » Servlet Request processing failed: org.springframework.dao.InvalidDataAccessResourceUsageException: could not execute statement [ERROR: relation "orders" does not exist
+[ERROR]   OrdersApiIT.readsBackWhatWasStored:57->postOrder:88 » Servlet Request processing failed: org.springframework.dao.InvalidDataAccessResourceUsageException: could not execute statement [ERROR: relation "orders" does not exist
+[ERROR]   OrdersApiIT.recordsADecline:74->postOrder:88 » Servlet Request processing failed: org.springframework.dao.InvalidDataAccessResourceUsageException: could not execute statement [ERROR: relation "orders" does not exist
+[ERROR]   OrdersApiIT.returns404ForAnUnknownOrder:82 » Servlet Request processing failed: org.springframework.dao.InvalidDataAccessResourceUsageException: JDBC exception executing SQL [ERROR: relation "orders" does not exist
+[ERROR]   OrdersHttpIT.getReturnsTheStoredOrder:60 NullPointer Cannot invoke "java.net.URI.toString()" because the return value of "org.springframework.http.HttpHeaders.getLocation()" is null
+[ERROR] Tests run: 10, Failures: 3, Errors: 5, Skipped: 0
+[INFO] BUILD FAILURE

@@ -1,0 +1,11 @@
+# ref: step-6c-nullaway-fails (b2acbfa)
+# commit: Step 6c: JSpecify @NullMarked payments package, NullAway in the build
+# spring boot parent: 4.1.1
+# java: openjdk version "21.0.10" 2026-01-20 LTS
+# recorded: 2026-10-07 18:26 CAT
+
+$ ./mvnw clean compile
+[INFO] BUILD FAILURE
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.15.0:compile (default-compile) on project orders: Compilation failure
+[ERROR] src/main/java/com/example/orders/payments/HttpPaymentGateway.java:[28,46] [NullAway] dereferenced expression 'response' is @Nullable
+[ERROR]     (see http://t.uber.com/nullaway )

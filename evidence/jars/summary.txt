@@ -1,0 +1,98 @@
+# BOOT-INF/lib, Spring Boot jars only
+
+## 3.5.16 (step-1-latest-3.5)
+   1904513  spring-boot-3.5.16.jar
+    707758  spring-boot-actuator-3.5.16.jar
+    842766  spring-boot-actuator-autoconfigure-3.5.16.jar
+   2088460  spring-boot-autoconfigure-3.5.16.jar
+     28417  spring-boot-configuration-metadata-3.5.16.jar
+     53753  spring-boot-jarmode-tools-3.5.16.jar
+     22119  spring-boot-properties-migrator-3.5.16.jar
+
+## 4.1.1 (step-6-opt-in, same features plus the opt-ins)
+   1392217  spring-boot-4.1.1.jar
+    357191  spring-boot-actuator-4.1.1.jar
+    141045  spring-boot-actuator-autoconfigure-4.1.1.jar
+    372740  spring-boot-autoconfigure-4.1.1.jar
+     30273  spring-boot-data-commons-4.1.1.jar
+     13568  spring-boot-data-jpa-4.1.1.jar
+     76988  spring-boot-flyway-4.1.1.jar
+    155266  spring-boot-health-4.1.1.jar
+     27964  spring-boot-hibernate-4.1.1.jar
+    142672  spring-boot-http-client-4.1.1.jar
+     54316  spring-boot-http-converter-4.1.1.jar
+     82549  spring-boot-jackson-4.1.1.jar
+     53968  spring-boot-jarmode-tools-4.1.1.jar
+    204578  spring-boot-jdbc-4.1.1.jar
+     30628  spring-boot-jpa-4.1.1.jar
+    248317  spring-boot-micrometer-metrics-4.1.1.jar
+     28846  spring-boot-micrometer-observation-4.1.1.jar
+     16032  spring-boot-persistence-4.1.1.jar
+     45030  spring-boot-restclient-4.1.1.jar
+     47081  spring-boot-servlet-4.1.1.jar
+     36059  spring-boot-sql-4.1.1.jar
+    125521  spring-boot-tomcat-4.1.1.jar
+     21031  spring-boot-transaction-4.1.1.jar
+     15260  spring-boot-validation-4.1.1.jar
+    171647  spring-boot-web-server-4.1.1.jar
+    175435  spring-boot-webmvc-4.1.1.jar
+
+3.5  all jars:  84, 58093331 bytes | spring-boot jars:  7, 5647786 bytes
+4.1  all jars:  85, 55821060 bytes | spring-boot jars: 26, 4066222 bytes
+
+## In 3.5 only (by artifact name, version stripped)
+android-json
+hibernate-commons-annotations
+jackson-dataformat-toml
+jackson-datatype-jdk8
+jackson-datatype-jsr310
+jackson-module-parameter-names
+jakarta.servlet-api
+jakarta.websocket-api
+jakarta.websocket-client-api
+jandex
+jboss-threads
+LatencyUtils
+smallrye-common-annotation
+smallrye-common-constraint
+smallrye-common-cpu
+smallrye-common-function
+spring-boot-configuration-metadata
+spring-boot-properties-migrator
+spring-jcl
+undertow-core
+undertow-servlet
+undertow-websockets-jsr
+wildfly-client-config
+wildfly-common
+xnio-api
+xnio-nio
+
+## In 4.1 only
+checker-qual
+commons-logging
+hibernate-models
+jspecify
+spring-boot-data-commons
+spring-boot-data-jpa
+spring-boot-flyway
+spring-boot-health
+spring-boot-hibernate
+spring-boot-http-client
+spring-boot-http-converter
+spring-boot-jackson
+spring-boot-jdbc
+spring-boot-jpa
+spring-boot-micrometer-metrics
+spring-boot-micrometer-observation
+spring-boot-persistence
+spring-boot-restclient
+spring-boot-servlet
+spring-boot-sql
+spring-boot-tomcat
+spring-boot-transaction
+spring-boot-validation
+spring-boot-web-server
+spring-boot-webmvc
+tomcat-embed-core
+tomcat-embed-websocket

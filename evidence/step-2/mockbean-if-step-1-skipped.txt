@@ -1,0 +1,42 @@
+# ref: step-3b-jackson-imports (d0ba7c3)
+# commit: Step 3b: Jackson 3 imports, @JacksonComponent, webmvc and restclient starters
+# spring boot parent: 4.1.1
+# java: openjdk version "21.0.10" 2026-01-20 LTS
+# recorded: 2026-10-07 18:24 CAT
+
+Experiment: step 1 skipped. The untouched 3.5 test sources (with @MockBean) compiled against Spring Boot 4.1.1
+(main code from step-3b-jackson-imports so that test compilation is reached).
+
+$ ./mvnw clean test-compile
+[WARNING] src/main/java/com/example/orders/payments/HttpPaymentGateway.java:[30,17] rootUri(java.lang.String) in org.springframework.boot.restclient.RestTemplateBuilder has been deprecated and marked for removal
+[WARNING] src/test/java/com/example/orders/TestcontainersConfiguration.java:[17,5] org.testcontainers.containers.PostgreSQLContainer in org.testcontainers.containers has been deprecated
+[WARNING] src/test/java/com/example/orders/TestcontainersConfiguration.java:[18,20] org.testcontainers.containers.PostgreSQLContainer in org.testcontainers.containers has been deprecated
+[WARNING] src/test/java/com/example/orders/config/JacksonConfigTest.java:[19,31] org.springframework.http.converter.json.Jackson2ObjectMapperBuilder in org.springframework.http.converter.json has been deprecated and marked for removal
+[INFO] BUILD FAILURE
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.15.0:testCompile (default-testCompile) on project orders: Compilation failure: Compilation failure: 
+[ERROR] src/test/java/com/example/orders/config/JacksonConfigTest.java:[8,38] package com.fasterxml.jackson.databind does not exist
+[ERROR] src/test/java/com/example/orders/config/JacksonConfigTest.java:[18,19] cannot find symbol
+[ERROR]   symbol:   class ObjectMapper
+[ERROR]   location: class com.example.orders.config.JacksonConfigTest
+[ERROR] src/test/java/com/example/orders/order/OrderControllerWebMvcTest.java:[22,63] package org.springframework.boot.test.autoconfigure.web.servlet does not exist
+[ERROR] src/test/java/com/example/orders/order/OrderControllerWebMvcTest.java:[24,50] package org.springframework.boot.test.mock.mockito does not exist
+[ERROR] src/test/java/com/example/orders/order/OrderControllerWebMvcTest.java:[28,2] cannot find symbol
+[ERROR]   symbol: class WebMvcTest
+[ERROR] src/test/java/com/example/orders/order/OrdersApiIT.java:[19,63] package org.springframework.boot.test.autoconfigure.web.servlet does not exist
+[ERROR] src/test/java/com/example/orders/order/OrdersApiIT.java:[22,50] package org.springframework.boot.test.mock.mockito does not exist
+[ERROR] src/test/java/com/example/orders/order/OrdersApiIT.java:[27,2] cannot find symbol
+[ERROR]   symbol: class AutoConfigureMockMvc
+[ERROR] src/test/java/com/example/orders/order/OrdersHttpIT.java:[14,48] package org.springframework.boot.test.web.client does not exist
+[ERROR] src/test/java/com/example/orders/order/OrdersHttpIT.java:[35,13] cannot find symbol
+[ERROR]   symbol:   class TestRestTemplate
+[ERROR]   location: class com.example.orders.order.OrdersHttpIT
+[ERROR] src/test/java/com/example/orders/payments/HttpPaymentGatewayTest.java:[15,62] package org.springframework.boot.test.autoconfigure.web.client does not exist
+[ERROR] src/test/java/com/example/orders/payments/HttpPaymentGatewayTest.java:[21,2] cannot find symbol
+[ERROR]   symbol: class RestClientTest
+[ERROR] src/test/java/com/example/orders/order/OrderControllerWebMvcTest.java:[37,6] cannot find symbol
+[ERROR]   symbol:   class MockBean
+[ERROR]   location: class com.example.orders.order.OrderControllerWebMvcTest
+[ERROR] src/test/java/com/example/orders/order/OrdersApiIT.java:[34,6] cannot find symbol
+[ERROR]   symbol:   class MockBean
+[ERROR]   location: class com.example.orders.order.OrdersApiIT
+[ERROR] src/test/java/com/example/orders/config/JacksonConfigTest.java:[19,27] incompatible types: org.springframework.http.converter.json.Jackson2ObjectMapperBuilder cannot be converted to tools.jackson.databind.json.JsonMapper.Builder

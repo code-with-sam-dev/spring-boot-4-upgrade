@@ -1,0 +1,19 @@
+# ref: step-6-opt-in (6ff5966)
+# commit: Step 6e: rename the reported property, remove the properties migrator
+# spring boot parent: 4.1.1
+# java: openjdk version "21.0.10" 2026-01-20 LTS
+# recorded: 2026-10-07 18:26 CAT
+
+ :: Spring Boot ::                (v4.1.1)
+INFO 52413 --- [orders] [           main] com.example.orders.OrdersApplication     : Starting OrdersApplication v0.0.1-SNAPSHOT using Java 21.0.10 with PID 52413 (target/orders-0.0.1-SNAPSHOT.jar)
+INFO 52413 --- [orders] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+INFO 52413 --- [orders] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://localhost:5442/orders (PostgreSQL 17.11)
+INFO 52413 --- [orders] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "public"."flyway_schema_history" does not exist yet
+INFO 52413 --- [orders] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.012s)
+INFO 52413 --- [orders] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "public"."flyway_schema_history" ...
+INFO 52413 --- [orders] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "1 - orders"
+INFO 52413 --- [orders] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.008s)
+INFO 52413 --- [orders] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+INFO 52413 --- [orders] [           main] com.example.orders.OrdersApplication     : Started OrdersApplication in 3.264 seconds (process running for 3.591)
+
+--- properties migrator: no report printed ---

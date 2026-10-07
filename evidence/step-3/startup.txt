@@ -1,0 +1,23 @@
+# ref: step-3-loud-fixed (102ae69)
+# commit: Step 3d: declare the custom mapper as a JsonMapper
+# spring boot parent: 4.1.1
+# java: openjdk version "21.0.10" 2026-01-20 LTS
+# recorded: 2026-10-07 18:24 CAT
+
+ :: Spring Boot ::                (v4.1.1)
+INFO 50720 --- [orders] [           main] com.example.orders.OrdersApplication     : Starting OrdersApplication v0.0.1-SNAPSHOT using Java 21.0.10 with PID 50720 (target/orders-0.0.1-SNAPSHOT.jar)
+INFO 50720 --- [orders] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+INFO 50720 --- [orders] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+INFO 50720 --- [orders] [           main] com.example.orders.OrdersApplication     : Started OrdersApplication in 2.93 seconds (process running for 3.217)
+
+--- properties migrator report ---
+ERROR 50720 --- [orders] [           main] o.s.b.c.p.m.PropertiesMigrationListener  : 
+The use of configuration keys that are no longer supported was found in the environment:
+
+Property source 'Config resource 'class path resource [application.properties]' via location 'optional:classpath:/'':
+	Key: server.error.include-message
+		Line: 16
+		Reason: Replacement key 'spring.web.error.include-message' uses an incompatible target type
+
+
+Please refer to the release notes or reference guide for potential alternatives.

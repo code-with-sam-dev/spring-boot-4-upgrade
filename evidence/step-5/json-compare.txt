@@ -1,0 +1,10 @@
+# GET /orders/1 body, byte for byte
+
+boot-3.5:                    {"id":1,"customer_name":"Sarah Thompson","items":[{"sku":"KETTLE-01","quantity":1,"unit_price":"24.50 GBP"},{"sku":"MUG-02","quantity":2,"unit_price":"6.00 GBP"}],"total":"36.50 GBP","placed_on":"07/10/2026","payment_status":"AUTHORISED"}
+boot-4.1-objectmapper-bean:  {"id":1,"customerName":"Sarah Thompson","items":[{"sku":"KETTLE-01","quantity":1,"unitPrice":"24.50 GBP"},{"sku":"MUG-02","quantity":2,"unitPrice":"6.00 GBP"}],"total":"36.50 GBP","placedOn":"2026-10-07","paymentStatus":"AUTHORISED"}
+boot-4.1-customizer:         {"id":1,"customer_name":"Sarah Thompson","items":[{"sku":"KETTLE-01","quantity":1,"unit_price":"24.50 GBP"},{"sku":"MUG-02","quantity":2,"unit_price":"6.00 GBP"}],"total":"36.50 GBP","placed_on":"07/10/2026","payment_status":"AUTHORISED"}
+
+3.5 and 4.1 with the customizer: IDENTICAL
+3.5 and 4.1 with the ObjectMapper bean: DIFFERENT
+
+Note: in the ObjectMapper-bean run the snake_case POST is rejected, so order 1 is the camelCase one.

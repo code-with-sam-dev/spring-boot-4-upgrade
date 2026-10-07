@@ -1,0 +1,38 @@
+# ref: step-3-loud-fixed (102ae69)
+# commit: Step 3d: declare the custom mapper as a JsonMapper
+# spring boot parent: 4.1.1
+# java: openjdk version "21.0.10" 2026-01-20 LTS
+# recorded: 2026-10-07 18:24 CAT
+
+### POST /orders  (the first order after the upgrade)
+$ curl -i -X POST http://localhost:8080/orders -H 'Content-Type: application/json' -d '{"customer_name":"Sarah Thompson","currency":"GBP","items":[{"sku":"KETTLE-01","quantity":1,"unit_price":24.50},{"sku":"MUG-02","quantity":2,"unit_price":6.00}]}'
+HTTP/1.1 500 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 07 Oct 2026 16:24:35 GMT
+Connection: close
+
+{"timestamp":"2026-10-07T16:24:35.681Z","status":500,"error":"Internal Server Error","path":"/orders"}
+
+### GET /actuator/health
+$ curl -i http://localhost:8080/actuator/health
+HTTP/1.1 200 
+Content-Type: application/vnd.spring-boot.actuator.v3+json
+Transfer-Encoding: chunked
+Date: Wed, 07 Oct 2026 16:24:35 GMT
+
+{"groups":["liveness","readiness"],"status":"UP"}
+
+### GET /actuator/health/liveness
+$ curl -i http://localhost:8080/actuator/health/liveness
+HTTP/1.1 200 
+Content-Type: application/vnd.spring-boot.actuator.v3+json
+Transfer-Encoding: chunked
+Date: Wed, 07 Oct 2026 16:24:35 GMT
+
+{"status":"UP"}
+
+### application log around the failure
+WARN 50720 --- [orders] [nio-8080-exec-1] org.hibernate.orm.jdbc.error             : ERROR: relation "orders" does not exist
+ERROR 50720 --- [orders] [nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.InvalidDataAccessResourceUsageException: could not execute statement [ERROR: relation "orders" does not exist
+org.postgresql.util.PSQLException: ERROR: relation "orders" does not exist

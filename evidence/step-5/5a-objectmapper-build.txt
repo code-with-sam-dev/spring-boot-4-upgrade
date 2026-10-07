@@ -1,0 +1,23 @@
+# ref: step-5a-objectmapper-probe (028810a)
+# commit: Step 5a (probe): the custom mapper declared as ObjectMapper again
+# spring boot parent: 4.1.1
+# java: openjdk version "21.0.10" 2026-01-20 LTS
+# recorded: 2026-10-07 18:25 CAT
+
+$ ./mvnw clean package
+[ERROR] Tests run: 4, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 1.626 s <<< FAILURE! -- in com.example.orders.order.OrderControllerWebMvcTest
+[ERROR] com.example.orders.order.OrderControllerWebMvcTest.createsAnOrder -- Time elapsed: 0.009 s <<< FAILURE!
+    java.lang.AssertionError: Status expected:<201> but was:<400>
+[ERROR] com.example.orders.order.OrderControllerWebMvcTest.writesTheAgreedJsonContract -- Time elapsed: 0.034 s <<< FAILURE!
+    java.lang.AssertionError: No value at JSON path "$.customer_name"
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.127 s -- in com.example.orders.order.OrderServiceTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.example.orders.order.CreateOrderRequestTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.example.orders.order.OrderTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.232 s -- in com.example.orders.payments.HttpPaymentGatewayTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in com.example.orders.config.JacksonConfigTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.094 s -- in com.example.orders.money.MoneySerializerJsonTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.example.orders.money.MoneyTest
+[ERROR]   OrderControllerWebMvcTest.createsAnOrder:52 Status expected:<201> but was:<400>
+[ERROR]   OrderControllerWebMvcTest.writesTheAgreedJsonContract:63 No value at JSON path "$.customer_name"
+[ERROR] Tests run: 29, Failures: 2, Errors: 0, Skipped: 0
+[INFO] BUILD FAILURE

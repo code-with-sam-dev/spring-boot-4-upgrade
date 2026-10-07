@@ -1,0 +1,56 @@
+# ref: step-0-boot-3.5 (f8f7ddc)
+# commit: Orders service on Spring Boot 3.5.16
+# spring boot parent: 3.5.16
+# java: openjdk version "21.0.10" 2026-01-20 LTS
+# recorded: 2026-10-07 18:23 CAT
+
+### POST /orders
+$ curl -i -X POST http://localhost:8080/orders -H 'Content-Type: application/json' -d '{"customer_name":"Sarah Thompson","currency":"GBP","items":[{"sku":"KETTLE-01","quantity":1,"unit_price":24.50},{"sku":"MUG-02","quantity":2,"unit_price":6.00}]}'
+HTTP/1.1 201 Created
+Connection: keep-alive
+Location: /orders/1
+Transfer-Encoding: chunked
+Content-Type: application/json
+Date: Wed, 07 Oct 2026 16:23:44 GMT
+
+{"id":1,"customer_name":"Sarah Thompson","items":[{"sku":"KETTLE-01","quantity":1,"unit_price":"24.50 GBP"},{"sku":"MUG-02","quantity":2,"unit_price":"6.00 GBP"}],"total":"36.50 GBP","placed_on":"07/10/2026","payment_status":"AUTHORISED"}
+
+### GET /orders/1
+$ curl -i http://localhost:8080/orders/1
+HTTP/1.1 200 OK
+Connection: keep-alive
+Transfer-Encoding: chunked
+Content-Type: application/json
+Date: Wed, 07 Oct 2026 16:23:44 GMT
+
+{"id":1,"customer_name":"Sarah Thompson","items":[{"sku":"KETTLE-01","quantity":1,"unit_price":"24.50 GBP"},{"sku":"MUG-02","quantity":2,"unit_price":"6.00 GBP"}],"total":"36.50 GBP","placed_on":"07/10/2026","payment_status":"AUTHORISED"}
+
+### GET /orders/999 (unknown)
+$ curl -i http://localhost:8080/orders/999
+HTTP/1.1 404 Not Found
+Connection: keep-alive
+Transfer-Encoding: chunked
+Content-Type: application/json
+Date: Wed, 07 Oct 2026 16:23:44 GMT
+
+{"timestamp":"2026-10-07T16:23:44.698+00:00","status":404,"error":"Not Found","message":"Not Found","path":"/orders/999"}
+
+### GET /actuator/health
+$ curl -i http://localhost:8080/actuator/health
+HTTP/1.1 200 OK
+Connection: keep-alive
+Transfer-Encoding: chunked
+Content-Type: application/vnd.spring-boot.actuator.v3+json
+Date: Wed, 07 Oct 2026 16:23:44 GMT
+
+{"status":"UP"}
+
+### GET /actuator/health/liveness
+$ curl -i http://localhost:8080/actuator/health/liveness
+HTTP/1.1 404 Not Found
+Connection: keep-alive
+Content-Length: 0
+Date: Wed, 07 Oct 2026 16:23:44 GMT
+
+
+
