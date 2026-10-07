@@ -5,10 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.time.LocalDate;
 import java.util.Map;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 
 class JacksonConfigTest {
 
@@ -16,7 +15,7 @@ class JacksonConfigTest {
             LocalDate.of(2026, 10, 7);
 
     private final ObjectMapper mapper = new JacksonConfig()
-            .objectMapper(new Jackson2ObjectMapperBuilder());
+            .objectMapper(JsonMapper.builder());
 
     record Sample(String customerName, LocalDate placedOn) {
     }

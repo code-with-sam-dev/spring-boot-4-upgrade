@@ -27,7 +27,7 @@ public class HttpPaymentGateway implements PaymentGateway {
             RestTemplateBuilder builder,
             @Value("${payments.base-url}") String baseUrl) {
         this.restTemplate = builder
-                .rootUri(baseUrl)
+                .baseUri(baseUrl)
                 .connectTimeout(Duration.ofSeconds(2))
                 .readTimeout(Duration.ofSeconds(5))
                 .build();

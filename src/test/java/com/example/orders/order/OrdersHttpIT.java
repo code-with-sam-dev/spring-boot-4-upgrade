@@ -10,8 +10,9 @@ import com.example.orders.TestcontainersConfiguration;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.resttestclient.TestRestTemplate;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -27,6 +28,7 @@ import org.springframework.test.context.ActiveProfiles;
 @SpringBootTest(webEnvironment = DEFINED_PORT, properties = {
         "server.port=18080",
         "payments.base-url=http://localhost:18080"})
+@AutoConfigureTestRestTemplate
 @Import(TestcontainersConfiguration.class)
 @ActiveProfiles("local-stub")
 class OrdersHttpIT {
