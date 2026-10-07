@@ -6,7 +6,6 @@ import static tools.jackson.databind.cfg.DateTimeFeature.WRITE_DATES_AS_TIMESTAM
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.ext.javatime.deser.LocalDateDeserializer;
 import tools.jackson.databind.ext.javatime.ser.LocalDateSerializer;
 import tools.jackson.databind.json.JsonMapper;
@@ -26,7 +25,7 @@ public class JacksonConfig {
             DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     @Bean
-    public ObjectMapper objectMapper(
+    public JsonMapper objectMapper(
             JsonMapper.Builder builder) {
         return builder
                 .propertyNamingStrategy(SNAKE_CASE)
