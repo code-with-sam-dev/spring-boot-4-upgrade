@@ -25,6 +25,11 @@ public class HttpPaymentGateway implements PaymentGateway {
                 orderId, amount.amount(), amount.currency());
         AuthorisationResponse response =
                 api.authorise(request).getBody();
+        if (response == null) {
+            String message = "Payments returned an empty body"
+                    + " for order " + orderId;
+            throw new IllegalStateException(message);
+        }
         return PaymentStatus.valueOf(response.status());
     }
 }

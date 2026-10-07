@@ -1,6 +1,7 @@
 package com.example.orders.payments;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
@@ -66,6 +67,17 @@ class HttpPaymentGatewayTest {
         Money total = Money.of("1499.00", "GBP");
         assertThat(gateway.authorise(9L, total))
                 .isEqualTo(PaymentStatus.DECLINED);
+    }
+
+    @Test
+    void refusesAnEmptyBody() {
+        server.expect(requestTo(URL)).andRespond(withSuccess());
+        Money total = Money.of("1.00", "GBP");
+
+        assertThatThrownBy(() -> gateway.authorise(5L, total))
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage("Payments returned an empty body"
+                        + " for order 5");
     }
 
     private static DefaultResponseCreator json(String body) {
