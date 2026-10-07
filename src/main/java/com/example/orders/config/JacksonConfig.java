@@ -1,18 +1,19 @@
 package com.example.orders.config;
 
-import static com.fasterxml.jackson.databind.PropertyNamingStrategies.SNAKE_CASE;
-import static com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS;
+import static tools.jackson.databind.PropertyNamingStrategies.SNAKE_CASE;
+import static tools.jackson.databind.cfg.DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ext.javatime.deser.LocalDateDeserializer;
+import tools.jackson.databind.ext.javatime.ser.LocalDateSerializer;
+import tools.jackson.databind.json.JsonMapper;
+import tools.jackson.databind.module.SimpleModule;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 /**
  * The JSON contract our clients rely on: snake_case names
@@ -26,14 +27,19 @@ public class JacksonConfig {
 
     @Bean
     public ObjectMapper objectMapper(
-            Jackson2ObjectMapperBuilder builder) {
-        var writer = new LocalDateSerializer(UK_DATE);
-        var reader = new LocalDateDeserializer(UK_DATE);
+            JsonMapper.Builder builder) {
         return builder
                 .propertyNamingStrategy(SNAKE_CASE)
-                .featuresToDisable(WRITE_DATES_AS_TIMESTAMPS)
-                .serializerByType(LocalDate.class, writer)
-                .deserializerByType(LocalDate.class, reader)
+                .disable(WRITE_DATES_AS_TIMESTAMPS)
+                .addModule(ukDates())
                 .build();
+    }
+
+    private static SimpleModule ukDates() {
+        return new SimpleModule("uk-dates")
+                .addSerializer(LocalDate.class,
+                        new LocalDateSerializer(UK_DATE))
+                .addDeserializer(LocalDate.class,
+                        new LocalDateDeserializer(UK_DATE));
     }
 }

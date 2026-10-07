@@ -1,24 +1,22 @@
 package com.example.orders.money;
 
-import java.io.IOException;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.databind.SerializationContext;
+import tools.jackson.databind.ValueSerializer;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
-
-import org.springframework.boot.jackson.JsonComponent;
+import org.springframework.boot.jackson.JacksonComponent;
 
 /**
  * Writes Money as one string, "24.50 GBP", not an object.
  */
-@JsonComponent
-public class MoneySerializer extends JsonSerializer<Money> {
+@JacksonComponent
+public class MoneySerializer extends ValueSerializer<Money> {
 
     @Override
     public void serialize(
             Money value,
             JsonGenerator gen,
-            SerializerProvider serializers) throws IOException {
+            SerializationContext context) {
         gen.writeString(value.display());
     }
 }
