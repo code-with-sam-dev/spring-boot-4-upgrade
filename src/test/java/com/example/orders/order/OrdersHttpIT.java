@@ -27,7 +27,8 @@ import org.springframework.test.context.ActiveProfiles;
  */
 @SpringBootTest(webEnvironment = DEFINED_PORT, properties = {
         "server.port=18080",
-        "payments.base-url=http://localhost:18080"})
+        "spring.http.serviceclient.payments.base-url="
+                + "http://localhost:18080"})
 @AutoConfigureTestRestTemplate
 @Import(TestcontainersConfiguration.class)
 @ActiveProfiles("local-stub")

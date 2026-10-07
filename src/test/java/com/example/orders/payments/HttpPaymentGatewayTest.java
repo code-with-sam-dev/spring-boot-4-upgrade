@@ -11,16 +11,13 @@ import com.example.orders.money.Money;
 import com.example.orders.order.PaymentStatus;
 import org.junit.jupiter.api.Test;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.restclient.test.autoconfigure.RestClientTest;
 import org.springframework.http.HttpMethod;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.client.response.DefaultResponseCreator;
+import org.springframework.web.client.RestClient;
+import org.springframework.web.client.support.RestClientAdapter;
+import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
-@RestClientTest(HttpPaymentGateway.class)
-@TestPropertySource(properties =
-        "payments.base-url=http://payments.test")
 class HttpPaymentGatewayTest {
 
     private static final String AUTHORISED = """
@@ -29,18 +26,29 @@ class HttpPaymentGatewayTest {
     private static final String DECLINED = """
             {"status":"DECLINED","reference":"pay-9"}
             """;
-    private static final String PATH =
-            "/payments/authorisations";
+    private static final String BASE = "http://payments.test";
+    private static final String URL =
+            BASE + "/payments/authorisations";
 
-    @Autowired
-    private HttpPaymentGateway gateway;
+    private final RestClient.Builder builder =
+            RestClient.builder().baseUrl(BASE);
+    private final MockRestServiceServer server =
+            MockRestServiceServer.bindTo(builder).build();
+    private final HttpPaymentGateway gateway =
+            new HttpPaymentGateway(paymentsApi(builder));
 
-    @Autowired
-    private MockRestServiceServer server;
+    private static PaymentsApi paymentsApi(
+            RestClient.Builder builder) {
+        RestClient client = builder.build();
+        return HttpServiceProxyFactory
+                .builderFor(RestClientAdapter.create(client))
+                .build()
+                .createClient(PaymentsApi.class);
+    }
 
     @Test
     void postsTheAmountAndReadsTheStatus() {
-        server.expect(requestTo(PATH))
+        server.expect(requestTo(URL))
                 .andExpect(method(HttpMethod.POST))
                 .andExpect(jsonPath("$.amount").value(36.5))
                 .andRespond(json(AUTHORISED));
@@ -52,7 +60,7 @@ class HttpPaymentGatewayTest {
 
     @Test
     void passesADeclineThrough() {
-        server.expect(requestTo(PATH))
+        server.expect(requestTo(URL))
                 .andRespond(json(DECLINED));
 
         Money total = Money.of("1499.00", "GBP");
