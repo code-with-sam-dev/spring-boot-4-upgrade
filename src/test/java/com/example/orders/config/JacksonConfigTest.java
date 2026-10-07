@@ -14,8 +14,14 @@ class JacksonConfigTest {
     private static final LocalDate OCT_7 =
             LocalDate.of(2026, 10, 7);
 
-    private final ObjectMapper mapper = new JacksonConfig()
-            .objectMapper(JsonMapper.builder());
+    private final ObjectMapper mapper = customised();
+
+    private static ObjectMapper customised() {
+        JsonMapper.Builder builder = JsonMapper.builder();
+        new JacksonConfig().ordersJsonContract()
+                .customize(builder);
+        return builder.build();
+    }
 
     record Sample(String customerName, LocalDate placedOn) {
     }
