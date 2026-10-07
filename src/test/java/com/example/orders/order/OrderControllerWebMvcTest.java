@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.example.orders.TestOrders;
+import com.example.orders.config.ApiVersionConfig;
 import com.example.orders.config.JacksonConfig;
 import com.example.orders.money.Money;
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 @WebMvcTest(OrderController.class)
-@Import(JacksonConfig.class)
+@Import({JacksonConfig.class, ApiVersionConfig.class})
 class OrderControllerWebMvcTest {
 
     private static final Money PRICE = Money.of("24.50", "GBP");
@@ -86,6 +87,40 @@ class OrderControllerWebMvcTest {
 
         postOrder(noCustomer)
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void version1IsTheDefault() throws Exception {
+        given(service.find(42L)).willReturn(placed);
+
+        mvc.perform(get("/orders/42"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.items").isArray());
+    }
+
+    @Test
+    void version2ReturnsASummary() throws Exception {
+        given(service.find(42L)).willReturn(placed);
+
+        mvc.perform(get("/orders/42").header("X-Version", "2"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.item_count").value(1))
+                .andExpect(jsonPath("$.items").doesNotExist());
+    }
+
+    @Test
+    void rejectsAnUnknownVersion() throws Exception {
+        mvc.perform(get("/orders/42").header("X-Version", "3"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void marksVersion1AsDeprecated() throws Exception {
+        given(service.find(42L)).willReturn(placed);
+
+        mvc.perform(get("/orders/42").header("X-Version", "1"))
+                .andExpect(header().exists("Deprecation"))
+                .andExpect(header().exists("Sunset"));
     }
 
     private ResultActions postOrder(String body)

@@ -30,8 +30,13 @@ public class OrderController {
         return ResponseEntity.created(location).body(order);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(path = "/{id}", version = "1")
     public OrderView find(@PathVariable long id) {
         return service.find(id);
+    }
+
+    @GetMapping(path = "/{id}", version = "2")
+    public OrderSummaryV2 findV2(@PathVariable long id) {
+        return OrderSummaryV2.of(service.find(id));
     }
 }
